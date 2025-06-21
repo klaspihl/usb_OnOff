@@ -1,6 +1,6 @@
 services:
   usb-fan:
-    build: .
+    image: klaspihl/usb_onoff:latest
     devices:
       - "/dev/bus/usb:/dev/bus/usb"
     privileged: true

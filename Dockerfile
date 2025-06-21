@@ -2,7 +2,9 @@ FROM debian:stable-slim
 
 ENV TEMP_THRESHOLD_HIGH=65 \
     TEMP_THRESHOLD_LOW=45 \
-    FREQ=30
+    FREQ=30 \
+    UHUBCTL_LOCATION=7-1 \
+    UHUBCTL_PORT=2
 
 RUN apt-get update && \
     apt-get install -y lm-sensors uhubctl && \

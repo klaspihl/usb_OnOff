@@ -9,6 +9,8 @@ services:
       - TEMP_THRESHOLD_HIGH=65
       - TEMP_THRESHOLD_LOW=45
       - FREQ=30
+      - UHUBCTL_LOCATION=7-1
+      - UHUBCTL_PORT=2
     healthcheck:
       test: ["CMD", "pgrep", "-f", "usb_OnOff.sh"]
       interval: 30s

@@ -2,6 +2,8 @@
 
 TEMP_THRESHOLD_HIGH="${TEMP_THRESHOLD_HIGH:-65}"
 TEMP_THRESHOLD_LOW="${TEMP_THRESHOLD_LOW:-45}"
+UHUBCTL_LOCATION="${UHUBCTL_LOCATION:-7-1}"
+UHUBCTL_PORT="${UHUBCTL_PORT:-2}"
 POWER_STATUS=undefined
 FREQ="${FREQ:-30}"
 
@@ -27,11 +29,11 @@ while true; do
 
     if [ "$TEMP" -ge "$TEMP_THRESHOLD_HIGH" ] && [ "$POWER_STATUS" != "on" ]; then
         echo "$(date '+%Y-%m-%d %H:%M:%S') - USB POWER ON (TEMP: $TEMP°C)"
-        uhubctl -l 7-1 -p 2 -a on
+        uhubctl -l "$UHUBCTL_LOCATION" -p "$UHUBCTL_PORT" -a on
         POWER_STATUS=on
     elif [ "$TEMP" -le "$TEMP_THRESHOLD_LOW" ] && [ "$POWER_STATUS" != "off" ]; then
         echo "$(date '+%Y-%m-%d %H:%M:%S') - USB POWER OFF (TEMP: $TEMP°C)"
-        uhubctl -l 7-1 -p 2 -a off
+        uhubctl -l "$UHUBCTL_LOCATION" -p "$UHUBCTL_PORT" -a off
         POWER_STATUS=off
     fi
     for ((i=0; i<$FREQ; i++)); do

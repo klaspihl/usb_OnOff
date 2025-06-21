@@ -1,0 +1,16 @@
+services:
+  usb-fan:
+    build: .
+    devices:
+      - "/dev/bus/usb:/dev/bus/usb"
+    privileged: true
+    restart: unless-stopped
+    environment:
+      - TEMP_THRESHOLD_HIGH=65
+      - TEMP_THRESHOLD_LOW=45
+      - FREQ=30
+    healthcheck:
+      test: ["CMD", "pgrep", "-f", "usb_OnOff.sh"]
+      interval: 30s
+      timeout: 10s
+      retries: 3

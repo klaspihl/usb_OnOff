@@ -12,7 +12,7 @@ services:
       - UHUBCTL_LOCATION=7-1
       - UHUBCTL_PORT=2
     healthcheck:
-      test: ["CMD", "pgrep", "-f", "usb_OnOff.sh"]
+      test: ["CMD", "sh", "-c", "grep -l usb_OnOff.sh /proc/1/cmdline 2>/dev/null"]
       interval: 30s
       timeout: 10s
       retries: 3
